@@ -18,17 +18,23 @@
 			"<TITLE>" + userName
 					+ "'s To-Do List</TITLE>"+
 					"<p id=\"name\" style=\"visibility:hidden\">" + userName + "</p>");
+	
+	response.getWriter().print("<form name=\"addItem\" action=\"AddItemServlet\" method=\"GET\">"
+			+ "Task: <input type=\"text\" name=\"task\" /> <br />"
+			+ "<input type=\"submit\" value=\"Add to list\" />"
+			+ "<p style=\"visibility:hidden\">Username: <input type=\"text\" name=\"user\" value=\"" + userName + "\"/></p></form>");
+	
+	
 %>
 
 </HEAD><BODY>
 
-fuck
+<div>
+	<form method="post" name="logout" action="LogoutServlet">
+		<input type="submit" value="Logout" />
+	</form>
 
-<form name="addItem" action="AddItemServlet" method="GET">
-			Task: <input type="text" name="task" /> <br />
-			Username: <input type="text" name="user" />
-			<input type="submit" value="Add to list" />
-</form>
+</div>
 
 
 </BODY></HTML>

@@ -3,10 +3,9 @@
 
 <head>
 <title>REG</title>
-<style>
-</style>
 </head>
 <body>
+
 	<table class='center'>
 		<form method="get" name="register" action="RegisterServlet">
 			<p>Enter your username and password</p>
