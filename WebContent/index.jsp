@@ -14,13 +14,14 @@
 
 </head>
 <body>
-		<form name="flogin" action="LoginServlet" onsubmit="return validateForm()" method="GET">
-			User: <input type="text" name="userName" />
-			Password: <input type="password" name="password" />
-			<input type="submit" value="Login" />
-		</form>
-		<form action="register.jsp">
-			<input type="submit" value="Register" />
-		</form>
+	<form name="flogin" action="LoginServlet"
+		onsubmit="return validateForm()" method="GET">
+		User: <input type="text" name="userName" /> Password: <input
+			type="password" name="password" /> <input type="submit"
+			value="Login" />
+	</form>
+	<form action="register.jsp">
+		<input type="submit" value="Register" />
+	</form>
 </body>
 </html>

@@ -28,12 +28,12 @@ public class AddItemServlet extends HttpServlet {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection(dbURL, dbUser, dbPass);
-			
+
 			ToDoObject todo = new ToDoObject(task, user);
 			PersistenceUtil.persist(todo);
-			
+
 			connection.close();
-			
+
 			response.sendRedirect("todolist.jsp");
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();

@@ -34,10 +34,6 @@ public class RegisterServlet extends HttpServlet {
 
 			PreparedStatement statement = connection.prepareStatement("INSERT INTO users VALUES('"+userName+"',SHA('"+userPassword+"'))");
 			statement.executeUpdate();
-			statement = connection.prepareStatement("CREATE TABLE "+ userName
-					+ "List(Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,"
-					+ "Description VARCHAR(255) NOT NULL, PRIMARY KEY(date))");
-			statement.executeUpdate();
 			
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
