@@ -16,6 +16,12 @@
     <servlet-name>ToDoServlet</servlet-name>
     <servlet-class>main.ToDoServlet</servlet-class>
   </servlet>
+    <servlet>
+    <description></description>
+    <display-name>AddItemServlet</display-name>
+    <servlet-name>AddItemServlet</servlet-name>
+    <servlet-class>main.AddItemServlet</servlet-class>
+  </servlet>
   <servlet>
     <servlet-name>JPAServlet</servlet-name>
     <servlet-class>main.Driver</servlet-class>
@@ -51,5 +57,9 @@
   <servlet-mapping>
     <servlet-name>ToDoServlet</servlet-name>
     <url-pattern>/ToDoServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddItemServlet</servlet-name>
+    <url-pattern>/AddItemServlet</url-pattern>
   </servlet-mapping>
 </web-app>
