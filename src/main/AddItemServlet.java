@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import persistence.PersistenceUtil;
 import entity.ToDoObject;
+import entity.User;
 
 @SuppressWarnings("serial")
 public class AddItemServlet extends HttpServlet {
@@ -29,7 +30,7 @@ public class AddItemServlet extends HttpServlet {
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection(dbURL, dbUser, dbPass);
 
-			PersistenceUtil.persist(new ToDoObject(task, user));
+			PersistenceUtil.persist(new ToDoObject(task, new User(user, "xxxx")));
 
 			connection.close();
 

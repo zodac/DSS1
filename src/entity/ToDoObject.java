@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class ToDoObject {
@@ -13,14 +15,15 @@ public class ToDoObject {
 	private Date date;
 	@Column(name="Task")
 	private String task;
-	@Column(name="User")
-	private String user;
+	@ManyToOne(optional=false)
+	@JoinColumn(name="UserName", nullable=false, updatable=false)
+	private User user;
 	
 	public ToDoObject(){
 		
 	}
 	
-	public ToDoObject(String task, String user){
+	public ToDoObject(String task, User user){
 		super();
 		this.date = new Date();
 		this.task = task;

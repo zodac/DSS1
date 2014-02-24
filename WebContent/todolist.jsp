@@ -38,7 +38,7 @@
 		if(tables.next()){
 
 			resultset = statement.executeQuery("SELECT DATE_FORMAT(timestamp, '%d/%m/%Y %k:%i') AS Timestamp, "
-													   + "task AS Task FROM ToDoObject WHERE user='" + userName + "'");
+													   + "task AS Task FROM ToDoObject WHERE userName='" + userName + "'");
 			ResultSetMetaData metaData = resultset.getMetaData();
 			int columnCount = metaData.getColumnCount();
 			
