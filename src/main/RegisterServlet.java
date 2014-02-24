@@ -3,7 +3,6 @@ package main;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,6 +11,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.codec.digest.DigestUtils;
+
+import persistence.PersistenceUtil;
+import entity.User;
 
 @SuppressWarnings("serial")
 public class RegisterServlet extends HttpServlet {      
@@ -37,31 +41,27 @@ public class RegisterServlet extends HttpServlet {
 			String userPassword = request.getParameter("password");
 			
 			userStatement = connection.createStatement();
-			resultset = userStatement.executeQuery("SELECT userName FROM users");
+			resultset = userStatement.executeQuery("SELECT UserName FROM user");
 			
 			while(resultset.next() && valid){
 				if(resultset.getString(1).equals(userName))
 					valid = false;
 			}
 			
-			if(valid){
-				PreparedStatement statement = connection.prepareStatement("INSERT INTO users VALUES('"+userName+"',SHA('"+userPassword+"'))");
-				statement.executeUpdate();
-				statement.close();
-			}
+			if(valid)
+				PersistenceUtil.persist(new User(userName, DigestUtils.sha1Hex(userPassword)));
 			
 			connection.close();
 			resultset.close();
 			userStatement.close();			
 		} catch (SQLException | ClassNotFoundException e) {
-			
 		} finally {
 		}
 		
 		if(valid)
 			response.sendRedirect("index.jsp");
-		else{
-			response.getWriter().print("<script>alert(\"Username already taken!\");window.navigate(\"register.jsp\");</script>");
-		}
+		else
+			response.getWriter().print("<script>alert(\"Username already taken!\");"
+									+ "window.navigate(\"register.jsp\");</script>");
 	}
 }

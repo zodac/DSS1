@@ -29,8 +29,7 @@ public class AddItemServlet extends HttpServlet {
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection(dbURL, dbUser, dbPass);
 
-			ToDoObject todo = new ToDoObject(task, user);
-			PersistenceUtil.persist(todo);
+			PersistenceUtil.persist(new ToDoObject(task, user));
 
 			connection.close();
 
