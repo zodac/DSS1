@@ -37,7 +37,7 @@
 
 		if(tables.next()){
 
-			resultset = statement.executeQuery("SELECT DATE_FORMAT(timestamp, '%d/%m/%Y %k:%i') AS Date, "
+			resultset = statement.executeQuery("SELECT DATE_FORMAT(timestamp, '%d/%m/%Y %k:%i') AS Timestamp, "
 													   + "task AS Task FROM ToDoObject WHERE user='" + userName + "'");
 			ResultSetMetaData metaData = resultset.getMetaData();
 			int columnCount = metaData.getColumnCount();
@@ -46,16 +46,21 @@
 					+ "</FONT></B></p>"
 					+ "<TABLE cellpadding=\"5\" border=\"1\"" + "<TR>");
 
-			for (int i = 1; i <= columnCount; i++) {
-				response.getWriter().print("<TD><B>" + metaData.getColumnName(i)
-						+ "</B></TD>");
+			for (int i = 1; i <= columnCount+1; i++) {
+				if(i <= columnCount)
+					response.getWriter().print("<TD><B>" + metaData.getColumnName(i) + "</B></TD>");
+				else
+					response.getWriter().print("<TD><B>Remove Task</B></TD>");
 			}
 			response.getWriter().print("</TR>");
 
 			while (resultset.next()) {
 				response.getWriter().print("<TR>");
-				for (int i = 1; i <= columnCount; i++) {
-					response.getWriter().print("<TD>" + resultset.getString(i) + "</TD>");
+				for (int i = 1; i <= columnCount+1; i++) {
+					if(i <= columnCount)
+						response.getWriter().print("<TD>" + resultset.getString(i) + "</TD>");
+					else
+						response.getWriter().print("<TD>Remove</TD>");
 				}
 				response.getWriter().print("</TR>");
 			}
@@ -65,18 +70,15 @@
 		
 		statement.close();
 		connection.close();
-		
-		
-		
 	} catch (Exception e) {
 		System.out.println(e.getMessage());
 	}
 %>
 
+
 </HEAD><BODY>
 
-<DIV style="position: relative">
-		<p style="position: fixed; bottom: 0; width =100%; text-align: center"></p>
+<DIV style="position: relative; text-align: center">
 			<a href="addItem.jsp">Add Item</a>
 </DIV>
 
@@ -84,13 +86,6 @@
 	<form method="post" name="logout" action="LogoutServlet">
 		<input type="submit" value="Logout" />
 	</form>
-
 </div>
-</BODY>
-</HTML>
 
-
-
-
-
-
+</BODY></HTML>
