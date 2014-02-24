@@ -38,31 +38,40 @@ public class LoginServlet extends HttpServlet {
 			String userPassword = request.getParameter("password");
 
 			PreparedStatement statement = connection
-					.prepareStatement("SELECT UserPassword FROM user WHERE UserName = ?");
-			statement.setString(1, userName);
+					.prepareStatement("SELECT UserPassword from user WHERE UserName = '" + userName + "'");
 
 			ResultSet resultset = statement.executeQuery();
 			ResultSetMetaData resultmetadata = resultset.getMetaData();
+			
+			resultset.last(); 
+			int total = resultset.getRow();
+			resultset.beforeFirst();
 
 			int columnCount = resultmetadata.getColumnCount();
 
-			while (resultset.next()) {
-				for (int i = 1; i <= columnCount; i++) {
-
-					String columnValue = resultset.getString(i);
-					if (columnValue.equals(DigestUtils.sha1Hex(userPassword))) {
-						Cookie loginCookie = new Cookie("user", userName);
-						// setting cookie to expiry in 30 mins
-						loginCookie.setMaxAge(30 * 60);
-
-						response.addCookie(loginCookie);
-						response.sendRedirect("todolist.jsp");
-					} else {
-						response.sendRedirect("index.jsp");
+			if(total > 0){
+				while (resultset.next()) {
+					for (int i = 1; i <= columnCount; i++) {
+	
+						String columnValue = resultset.getString(i);
+						
+						if (columnValue.equals(DigestUtils.sha1Hex(userPassword))) {
+							System.out.println("match!");
+							Cookie loginCookie = new Cookie("user", userName);
+							// setting cookie to expiry in 30 mins
+							loginCookie.setMaxAge(30 * 60);
+	
+							response.addCookie(loginCookie);
+							response.sendRedirect("todolist.jsp");
+						} else {
+							response.sendRedirect("index.jsp");
+						}
 					}
 				}
+			} else {
+				response.sendRedirect("index.jsp");
 			}
-
+			
 			out.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
