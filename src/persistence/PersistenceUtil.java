@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import entity.ToDoObject;
+
 @SuppressWarnings("serial")
 public class PersistenceUtil implements Serializable {
 	protected static EntityManagerFactory emf = Persistence.createEntityManagerFactory("DSS1");
@@ -24,6 +26,16 @@ public class PersistenceUtil implements Serializable {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(entity);
+		em.getTransaction().commit();
+		em.close();
+	}
+	
+	public static void removeToDoObject(int id) {
+		EntityManager em = emf.createEntityManager();
+		ToDoObject objectToRemove = em.find(ToDoObject.class, id);
+		
+		em.getTransaction().begin();
+		em.remove(objectToRemove);
 		em.getTransaction().commit();
 		em.close();
 	}

@@ -38,33 +38,45 @@
 		if(tables.next()){
 
 			resultset = statement.executeQuery("SELECT DATE_FORMAT(timestamp, '%d/%m/%Y %k:%i') AS Timestamp, "
-													   + "task AS Task FROM ToDoObject WHERE userName='" + userName + "'");
-			ResultSetMetaData metaData = resultset.getMetaData();
-			int columnCount = metaData.getColumnCount();
+													   + "task AS Task, ID FROM ToDoObject WHERE userName='" + userName + "'");
 			
-			response.getWriter().print("<CENTER><p><B><FONT face=\"verdana\" color=\"red\" size=\"5\">"
-					+ "</FONT></B></p>"
-					+ "<TABLE cellpadding=\"5\" border=\"1\"" + "<TR>");
+			resultset.last(); 
+			int total = resultset.getRow();
+			resultset.beforeFirst();
 
-			for (int i = 1; i <= columnCount+1; i++) {
-				if(i <= columnCount)
-					response.getWriter().print("<TD><B>" + metaData.getColumnName(i) + "</B></TD>");
-				else
-					response.getWriter().print("<TD><B>Remove Task</B></TD>");
-			}
-			response.getWriter().print("</TR>");
-
-			while (resultset.next()) {
-				response.getWriter().print("<TR>");
-				for (int i = 1; i <= columnCount+1; i++) {
-					if(i <= columnCount)
-						response.getWriter().print("<TD>" + resultset.getString(i) + "</TD>");
+			
+			if(total > 0){
+				ResultSetMetaData metaData = resultset.getMetaData();
+				int columnCount = metaData.getColumnCount();
+				
+				response.getWriter().print("<CENTER><p><B><FONT face=\"verdana\" color=\"red\" size=\"5\">"
+						+ "</FONT></B></p>"
+						+ "<TABLE cellpadding=\"5\" border=\"1\"" + "<TR>");
+	
+				for (int i = 1; i <= columnCount; i++)
+					if(i < columnCount)
+						response.getWriter().print("<TD><B>" + metaData.getColumnName(i) + "</B></TD>");
 					else
-						response.getWriter().print("<TD>Remove</TD>");
-				}
+						response.getWriter().print("<TD><B>Remove Task</B></TD>");
 				response.getWriter().print("</TR>");
+				
+				while (resultset.next()) {
+					response.getWriter().print("<TR>");
+					for (int i = 1; i <= columnCount; i++) {
+						if(i < columnCount)
+							response.getWriter().print("<TD>" + resultset.getString(i) + "</TD>");
+						else
+							response.getWriter().print("<TD><CENTER>"
+								+"<FORM method=\"POST\" action=\"RemoveItemServlet\">"
+								+"<INPUT type=\"text\" value=\"" + resultset.getString(i) + "\" style=\"display:none;\" name=\"removeID\" />"
+								+"<INPUT type=\"submit\" value=\"Remove\" />"
+								+"</FORM></CENTER></TD>");
+						
+					}
+					response.getWriter().print("</TR>");
+				}
+				response.getWriter().print("</TR></TABLE></CENTER>");
 			}
-			response.getWriter().print("</TR></TABLE></CENTER>");
 			resultset.close();
 		}
 		

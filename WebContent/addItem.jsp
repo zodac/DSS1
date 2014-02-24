@@ -23,8 +23,6 @@
 			+ "Task: <input type=\"text\" name=\"task\" /> <br />"
 			+ "<input type=\"submit\" value=\"Add to list\" />"
 			+ "<p style=\"visibility:hidden\">Username: <input type=\"text\" name=\"user\" value=\"" + userName + "\"/></p></form>");
-	
-	
 %>
 
 </HEAD><BODY>
