@@ -43,7 +43,7 @@ public class RegisterServlet extends HttpServlet {
 			resultset = userStatement.executeQuery("SELECT UserName FROM user");
 			
 			while(resultset.next() && valid){
-				if(resultset.getString(1).equals(userName))
+				if(resultset.getString(1).equalsIgnoreCase(userName))
 					valid = false;
 			}
 			

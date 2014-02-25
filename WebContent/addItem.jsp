@@ -22,7 +22,7 @@
 
 <style type="text/css">
     html, body {
-      background-color: #eee;
+      background-color: #B0C4DE;
     }
     body {
       padding-top: 40px; 

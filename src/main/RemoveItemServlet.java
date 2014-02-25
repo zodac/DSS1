@@ -15,7 +15,7 @@ import persistence.PersistenceUtil;
 @SuppressWarnings("serial")
 public class RemoveItemServlet extends HttpServlet {
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String dbURL = "jdbc:mysql://localhost:3306/DSS1";
 		String dbUser = "root";
@@ -26,9 +26,13 @@ public class RemoveItemServlet extends HttpServlet {
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection(dbURL, dbUser, dbPass);
 
-			Integer itemID = Integer.parseInt(request.getParameter("removeID"));
-			PersistenceUtil.removeToDoObject(itemID);
-
+			String taskID = request.getParameter("removeID");
+			
+			if(taskID != null){
+				Integer itemID = Integer.parseInt(taskID);
+				PersistenceUtil.removeToDoObject(itemID);
+			}
+			
 			connection.close();
 			response.sendRedirect("todolist.jsp");
 		} catch (SQLException | ClassNotFoundException e) {

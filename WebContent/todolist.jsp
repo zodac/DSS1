@@ -8,7 +8,7 @@
 
 <style type="text/css">
     html, body {
-      background-color: #eee;
+      background-color: #B0C4DE;
     }
     body {
       padding-top: 40px; 
@@ -121,7 +121,7 @@
 							response.getWriter().print("<TD>" + resultset.getString(i) + "</TD>");
 						else
 							response.getWriter().print("<TD style=\"width: 120px;\"><CENTER>"
-								+"<form method=\"POST\" action=\"RemoveItemServlet\">"
+								+"<form method=\"GET\" action=\"RemoveItemServlet\">"
 								+"<input type=\"text\" value=\"" + resultset.getString(i) + "\" style=\"display:none;\" name=\"removeID\" />"
 								+"<button class=\"btn btn-warning\" type=\"submit\">Remove</button>"
 								+"</form></CENTER></TD>");

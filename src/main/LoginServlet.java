@@ -20,8 +20,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 @SuppressWarnings("serial")
 public class LoginServlet extends HttpServlet {
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String dbURL = "jdbc:mysql://localhost:3306/DSS1";
 		String dbUserName = "root";
 		String dbPassword = "toor";
