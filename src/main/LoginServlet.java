@@ -56,9 +56,7 @@ public class LoginServlet extends HttpServlet {
 						String columnValue = resultset.getString(i);
 						
 						if (columnValue.equals(DigestUtils.sha1Hex(userPassword))) {
-							System.out.println("match!");
 							Cookie loginCookie = new Cookie("user", userName);
-							// setting cookie to expiry in 30 mins
 							loginCookie.setMaxAge(30 * 60);
 	
 							response.addCookie(loginCookie);
@@ -73,14 +71,9 @@ public class LoginServlet extends HttpServlet {
 			}
 			
 			out.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		} finally {
-			// close connection
 		}
 	}
 }

@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,18 +20,29 @@ public class AddItemServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String task = request.getParameter("task");
-		String user = request.getParameter("user");
 
 		String dbURL = "jdbc:mysql://localhost:3306/DSS1";
 		String dbUser = "root";
 		String dbPass = "toor";
 		Connection connection = null;
+		
+		String userName = null;
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("user")) {
+					userName = cookie.getValue();
+				}
+			}
+		}
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection(dbURL, dbUser, dbPass);
 
-			PersistenceUtil.persist(new ToDoObject(task, new User(user, "xxxx")));
+			
+			User user = PersistenceUtil.findUser(userName);
+			PersistenceUtil.persist(new ToDoObject(task, user));
 
 			connection.close();
 

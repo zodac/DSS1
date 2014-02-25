@@ -20,7 +20,7 @@ import entity.User;
 @SuppressWarnings("serial")
 public class RegisterServlet extends HttpServlet {      
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String dbURL = "jdbc:mysql://localhost:3306/DSS1";
 		String dbUserName = "root";
@@ -32,8 +32,7 @@ public class RegisterServlet extends HttpServlet {
 		
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
-			connection = DriverManager.getConnection(dbURL, dbUserName,
-					dbPassword);
+			connection = DriverManager.getConnection(dbURL, dbUserName, dbPassword);
 
 			response.setContentType("text/html");
 
@@ -61,7 +60,7 @@ public class RegisterServlet extends HttpServlet {
 		if(valid)
 			response.sendRedirect("index.jsp");
 		else
-			response.getWriter().print("<script>alert(\"Username already taken!\");"
-									+ "window.navigate(\"register.jsp\");</script>");
+			response.getWriter().print("<script>alert(\"Username taken!\");"
+										+ "window.location.replace(\"register.jsp\");</script>");
 	}
 }

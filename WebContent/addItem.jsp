@@ -14,27 +14,77 @@
 		response.sendRedirect("index.jsp");
 
 	response.setContentType("text/html");
-	response.getWriter().print(
-			"<TITLE>" + userName
-					+ "'s To-Do List</TITLE>"+
-					"<p id=\"name\" style=\"visibility:hidden\">" + userName + "</p>");
-	
-	response.getWriter().print("<form name=\"addItem\" action=\"AddItemServlet\" method=\"GET\">"
-			+ "Task: <input type=\"text\" name=\"task\" /> <br />"
-			+ "<input type=\"submit\" value=\"Add to list\" />"
-			+ "<p style=\"visibility:hidden\">Username: <input type=\"text\" name=\"user\" value=\"" + userName + "\"/></p></form>");
+	response.getWriter().print("<TITLE>" + userName+ "'s To-Do List</TITLE>");
 %>
 
-</HEAD><BODY>
+<script src="js/bootstrap.js"></script>
+<link href="css/bootstrap.css" rel="stylesheet">
 
-<div>
-	<form method="post" name="logout" action="LogoutServlet">
-		<input type="submit" value="Logout" />
-	</form>
+<style type="text/css">
+    html, body {
+      background-color: #eee;
+    }
+    body {
+      padding-top: 40px; 
+    }
+    .container {
+      width: 300px;
+    }
 
-</div>
+    .container > .content {
+      background-color: #fff;
+      padding: 20px;
+      margin: 0 -20px; 
+      -webkit-border-radius: 10px 10px 10px 10px;
+         -moz-border-radius: 10px 10px 10px 10px;
+              border-radius: 10px 10px 10px 10px;
+      -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+         -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+              box-shadow: 0 1px 2px rgba(0,0,0,.15);
+    }
+    
+    .login-form {
+		margin-left: 65px;
+	}
+	
+	legend {
+		margin-right: -50px;
+		font-weight: bold;
+	 	color: #404040;
+	}
+</style>
 
+</HEAD>
 
+<BODY>
+	<div style="position: absolute; top: 10; right: 0; margin-right: 10px;">
+		<form method="post" name="logout" action="LogoutServlet">
+				<button class="btn btn-danger" type="submit">Logout</button>
+		</form>
+	</div>
+	
+	<div class="container">
+		<div class="content">
+			<div class="row">
+				<div class="login-form">
+					<h2>Add Task</h2>
+					<form name="addItem" action="AddItemServlet" method="GET">
+						<fieldset>
+							<div class="control-group">
+								<input type="text" name="task" placeholder="Task Description"/>
+							</div>
+							<button class="btn btn-success" type="submit">Add to list</button>
+							<a href="todolist.jsp">
+								<button class="btn btn-warning" type="button">Cancel</button>
+							</a>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
 </BODY></HTML>
 
 

@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import entity.ToDoObject;
+import entity.User;
 
 @SuppressWarnings("serial")
 public class PersistenceUtil implements Serializable {
@@ -28,6 +29,14 @@ public class PersistenceUtil implements Serializable {
 		em.persist(entity);
 		em.getTransaction().commit();
 		em.close();
+	}
+	
+	public static User findUser(String userName){
+		EntityManager em = emf.createEntityManager();
+		User user = em.find(User.class, userName);
+		em.close();
+		
+		return user;
 	}
 	
 	public static void removeToDoObject(int id) {
