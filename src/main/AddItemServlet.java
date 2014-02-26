@@ -30,6 +30,6 @@ public class AddItemServlet extends HttpServlet {
 		User user = PersistenceUtil.findSingleUserName(userName);
 		PersistenceUtil.persist(new ToDoObject(task, user));
 
-		response.sendRedirect("todolist.jsp");
+		response.sendRedirect("toDoList.jsp");
 	}
 }

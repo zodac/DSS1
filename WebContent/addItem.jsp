@@ -11,9 +11,10 @@
 			}
 		}
 	}
-	if (userName == null)
-		response.sendRedirect("index.jsp");
-
+	if (userName == null){
+		response.getWriter().print("<script>alert(\"Must be logged in to view that page!\");"
+								 + "window.location.replace(\"index.jsp\");</script>");
+	}
 	response.getWriter().print("<TITLE>" + userName + "'s To-Do List</TITLE>");
 %>
 
@@ -26,7 +27,7 @@
 
 <body>
 	<div style="position: absolute; top: 10; right: 0; margin-right: 10px;">
-		<form method="post" name="logout" action="LogoutServlet">
+		<form method="POST" name="logout" action="LoginServlet">
 				<button class="btn btn-danger" type="submit">Logout</button>
 		</form>
 	</div>
@@ -42,7 +43,7 @@
 								<input type="text" name="task" placeholder="Task Description" required />
 							</div>
 							<button class="btn btn-success" type="submit">Add to list</button>
-							<a href="todolist.jsp">
+							<a href="toDoList.jsp">
 								<button class="btn btn-warning" type="button">Cancel</button>
 							</a>
 						</fieldset>

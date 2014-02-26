@@ -39,12 +39,31 @@ public class LoginServlet extends HttpServlet {
 				loginCookie.setMaxAge(30 * 60);
 
 				response.addCookie(loginCookie);
-				response.sendRedirect("todolist.jsp");
+				response.sendRedirect("toDoList.jsp");
 			} else{
 				response.getWriter().print("<script>alert(\"Username or password invalid!\");"
 						+ "window.location.replace(\"index.jsp\");</script>");
 			}
 			out.close();
 		}
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		Cookie loginCookie = null;
+		Cookie[] cookies = request.getCookies();
+		if(cookies != null){
+			for(Cookie cookie : cookies){
+				if(cookie.getName().equals("user")){
+					loginCookie = cookie;
+					break;
+				}
+			}
+		} 
+		if(loginCookie != null){
+			loginCookie.setMaxAge(0);
+			response.addCookie(loginCookie);
+		}
+		response.sendRedirect("index.jsp");
 	}
 }
