@@ -36,3 +36,7 @@ table {
 	max-width : 100%;
 	background-color: #B0C4DE;
 }
+
+.table-condensed td {
+  padding: 3px 4px;
+}
