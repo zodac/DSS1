@@ -2,12 +2,6 @@ package main;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -17,62 +11,40 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+import persistence.PersistenceUtil;
+import entity.User;
+
 @SuppressWarnings("serial")
 public class LoginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String dbURL = "jdbc:mysql://localhost:3306/DSS1";
-		String dbUserName = "root";
-		String dbPassword = "toor";
-		Connection connection = null;
+		response.setContentType("text/html");
 
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			connection = DriverManager.getConnection(dbURL, dbUserName, dbPassword);
+		String userName = request.getParameter("userName");
+		String userPassword = request.getParameter("password");
 
-			response.setContentType("text/html");
+		User user = PersistenceUtil.findUserAndPasswordByUsername(userName);
+		
+		if(user == null){
+			response.getWriter().print("<script>alert(\"Username or password invalid!\");"
+					+ "window.location.replace(\"index.jsp\");</script>");
+		} else {
 			PrintWriter out = response.getWriter();
-
-			String userName = request.getParameter("userName");
-			String userPassword = request.getParameter("password");
-
-			PreparedStatement statement = connection
-					.prepareStatement("SELECT UserPassword from user WHERE UserName = '" + userName + "'");
-
-			ResultSet resultset = statement.executeQuery();
-			ResultSetMetaData resultmetadata = resultset.getMetaData();
+			String userNameFromDB = user.getUserName();
+			String passWordFromDB = user.getUserPassword();
 			
-			resultset.last(); 
-			int total = resultset.getRow();
-			resultset.beforeFirst();
+			
+			if(passWordFromDB.equals(DigestUtils.sha1Hex(userPassword))){
+				Cookie loginCookie = new Cookie("user", userNameFromDB);
+				loginCookie.setMaxAge(30 * 60);
 
-			int columnCount = resultmetadata.getColumnCount();
-
-			if(total > 0){
-				while (resultset.next()) {
-					for (int i = 1; i <= columnCount; i++) {
-	
-						String columnValue = resultset.getString(i);
-						
-						if (columnValue.equals(DigestUtils.sha1Hex(userPassword))) {
-							Cookie loginCookie = new Cookie("user", userName);
-							loginCookie.setMaxAge(30 * 60);
-	
-							response.addCookie(loginCookie);
-							response.sendRedirect("todolist.jsp");
-						} else {
-							response.sendRedirect("index.jsp");
-						}
-					}
-				}
-			} else {
-				response.sendRedirect("index.jsp");
+				response.addCookie(loginCookie);
+				response.sendRedirect("todolist.jsp");
+			} else{
+				response.getWriter().print("<script>alert(\"Username or password invalid!\");"
+						+ "window.location.replace(\"index.jsp\");</script>");
 			}
-			
 			out.close();
-		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-		} finally {
 		}
 	}
 }

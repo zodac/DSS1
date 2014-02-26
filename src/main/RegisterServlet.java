@@ -1,11 +1,7 @@
 package main;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,46 +17,26 @@ import entity.User;
 public class RegisterServlet extends HttpServlet {      
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String dbURL = "jdbc:mysql://localhost:3306/DSS1";
-		String dbUserName = "root";
-		String dbPassword = "toor";
-		Connection connection = null;
-		ResultSet resultset = null;
-		Statement userStatement = null;
 		boolean valid = true;
+			
+		String userName = request.getParameter("username");
+		String userPassword = request.getParameter("password");
 		
-		try{
-			Class.forName("com.mysql.jdbc.Driver");
-			connection = DriverManager.getConnection(dbURL, dbUserName, dbPassword);
+		List<String> userNamesFromDB = PersistenceUtil.findAllUserNames();
 
-			response.setContentType("text/html");
-
-			String userName = request.getParameter("username");
-			String userPassword = request.getParameter("password");
-			
-			userStatement = connection.createStatement();
-			resultset = userStatement.executeQuery("SELECT UserName FROM user");
-			
-			while(resultset.next() && valid){
-				if(resultset.getString(1).equalsIgnoreCase(userName))
-					valid = false;
+		for(String userNameFromDB : userNamesFromDB){
+			if(userNameFromDB.equalsIgnoreCase(userName)){
+				valid = false;
+				break;
 			}
-			
-			if(valid)
-				PersistenceUtil.persist(new User(userName, DigestUtils.sha1Hex(userPassword)));
-			
-			connection.close();
-			resultset.close();
-			userStatement.close();			
-		} catch (SQLException | ClassNotFoundException e) {
-		} finally {
 		}
 		
-		if(valid)
+		if(valid){
+			PersistenceUtil.persist(new User(userName, DigestUtils.sha1Hex(userPassword)));
 			response.sendRedirect("index.jsp");
-		else
+		} else {
 			response.getWriter().print("<script>alert(\"Username taken!\");"
-										+ "window.location.replace(\"register.jsp\");</script>");
+					+ "window.location.replace(\"register.jsp\");</script>");
+		}
 	}
 }

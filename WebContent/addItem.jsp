@@ -1,5 +1,5 @@
+<%@ page contentType="text/html" language="java" import="java.sql.*"%>
 <HTML><HEAD>
-
 <%
 	String userName = null;
 	Cookie[] cookies = request.getCookies();
@@ -13,10 +13,10 @@
 	if (userName == null)
 		response.sendRedirect("index.jsp");
 
-	response.setContentType("text/html");
-	response.getWriter().print("<TITLE>" + userName+ "'s To-Do List</TITLE>");
+	response.getWriter().print("<TITLE>" + userName + "'s To-Do List</TITLE>");
 %>
 
+<script src="js/validation.js"></script>
 <script src="js/bootstrap.js"></script>
 <link href="css/bootstrap.css" rel="stylesheet">
 
@@ -68,10 +68,10 @@
 			<div class="row">
 				<div class="login-form">
 					<h2>Add Task</h2>
-					<form name="addItem" action="AddItemServlet" method="GET">
+					<form name="addItem" action="AddItemServlet" method="GET" onsubmit="return validateTask(this.task)">
 						<fieldset>
 							<div class="control-group">
-								<input type="text" name="task" placeholder="Task Description"/>
+								<input type="text" name="task" placeholder="Task Description" required />
 							</div>
 							<button class="btn btn-success" type="submit">Add to list</button>
 							<a href="todolist.jsp">
@@ -83,12 +83,4 @@
 			</div>
 		</div>
 	</div>
-	
-	
 </BODY></HTML>
-
-
-
-
-
-

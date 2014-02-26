@@ -1,24 +1,20 @@
-function validateLoginForm() {
-	var x = document.forms["flogin"]["userName"].value;
-	var y = document.forms["flogin"]["password"].value;
-	if (x == null || x == "" || y == null || y == "") {
-		alert("Username and Password must be filled out");
-		return false;
-	}
-}
-
-function validateRegistrationForm(){
-	var x = document.forms["register"]["username"].value;
+function validatePasswordsMatch(){
 	var y = document.forms["register"]["password"].value;
 	var z = document.forms["register"]["confirm"].value;
 	
-	if(x == null || x == "" || y == null || y == ""){
-		alert("Username and password must be entered");
-		return false;
-	}
 	if(y != z || z == null || z == ""){
 		alert("Passwords must match");
+		document.forms["register"]["password"].focus;
 		return false;
 	}
 }
 
+function validateTask(task){
+	if(document["addItem"]["task"].value.length > 255){
+		alert("Task too long! Please enter a maximum of 255 characters.");
+		document["addItem"]["task"].focus();
+		return false;
+	}
+	document["addItem"]["task"].value = document["addItem"]["task"].value.replace(/<\S[^><]*>/g, "");
+	return true;
+}

@@ -10,6 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+//@NamedQueries({
+//	@NamedQuery(name="ToDoObject.findToDoObjectsByUsername",
+//				query="SELECT o.date, o.task, o.id FROM ToDoObject o WHERE o.UserName = :userName"),
+//				query="SELECT o FROM ToDoObject o WHERE o.UserName = :userName"),
+//})
+
 @Entity
 public class ToDoObject {
 	@Id

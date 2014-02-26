@@ -1,9 +1,6 @@
 package main;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -20,43 +17,19 @@ public class AddItemServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String task = request.getParameter("task");
-
-		String dbURL = "jdbc:mysql://localhost:3306/DSS1";
-		String dbUser = "root";
-		String dbPass = "toor";
-		Connection connection = null;
 		
-		if(task.equals("")){
-			response.getWriter().print("<script>alert(\"Task cannot be empty!\");window.location.replace(\"addItem.jsp\");</script>");
-		}
-		if(task.length() > 255){
-			response.getWriter().print("<script>alert(\"Task too long!\");window.location.replace(\"addItem.jsp\");</script>");
-		}
-		else{
-			String userName = null;
-			Cookie[] cookies = request.getCookies();
-			if (cookies != null) {
-				for (Cookie cookie : cookies) {
-					if (cookie.getName().equals("user")) {
-						userName = cookie.getValue();
-					}
+		String userName = null;
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("user")) {
+					userName = cookie.getValue();
 				}
 			}
-			
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				connection = DriverManager.getConnection(dbURL, dbUser, dbPass);
-	
-				
-				User user = PersistenceUtil.findUser(userName);
-				PersistenceUtil.persist(new ToDoObject(task, user));
-	
-				connection.close();
-	
-				response.sendRedirect("todolist.jsp");
-			} catch (SQLException | ClassNotFoundException e) {
-				e.printStackTrace();
-			}
 		}
+		User user = PersistenceUtil.findSingleUserName(userName);
+		PersistenceUtil.persist(new ToDoObject(task, user));
+
+		response.sendRedirect("todolist.jsp");
 	}
 }

@@ -1,9 +1,6 @@
 <html><head>
-
-
 <title>Login page</title>
 
-<script src="js/validation.js"></script>
 <script src="js/bootstrap.js"></script>
 <link href="css/bootstrap.css" rel="stylesheet">
 
@@ -50,13 +47,13 @@
 			<div class="row">
 				<div class="login-form">
 					<h2>Login here</h2>
-					<form name="flogin" action="LoginServlet" onsubmit="return validateLoginForm()" method="GET">
+					<form name="flogin" action="LoginServlet" method="GET">
 						<fieldset>
 							<div class="control-group">
-								<input type="text" name="userName" placeholder="Username"/>
+								<input type="text" name="userName" placeholder="Username" required />
 							</div>
 							<div class="control-group">
-								<input type="password" name="password" placeholder="Password"/>
+								<input type="password" name="password" placeholder="Password" required />
 							</div>
 							<button class="btn btn-primary" type="submit">Sign In</button>
 							<a href="register.jsp">

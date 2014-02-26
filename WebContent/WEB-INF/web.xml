@@ -4,18 +4,14 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
+  
   <servlet>
-    <description></description>
+    <description>Allows users to register</description>
     <display-name>RegisterServlet</display-name>
     <servlet-name>RegisterServlet</servlet-name>
     <servlet-class>main.RegisterServlet</servlet-class>
   </servlet>
-  <servlet>
-    <description></description>
-    <display-name>ToDoServlet</display-name>
-    <servlet-name>ToDoServlet</servlet-name>
-    <servlet-class>main.ToDoServlet</servlet-class>
-  </servlet>
+  
     <servlet>
     <description></description>
     <display-name>AddItemServlet</display-name>
@@ -59,10 +55,6 @@
   <servlet-mapping>
     <servlet-name>RegisterServlet</servlet-name>
     <url-pattern>/RegisterServlet</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>ToDoServlet</servlet-name>
-    <url-pattern>/ToDoServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>AddItemServlet</servlet-name>

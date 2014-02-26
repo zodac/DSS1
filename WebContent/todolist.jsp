@@ -1,7 +1,6 @@
-<%@ page language="java" import="java.sql.*"%>
+<%@ page contentType="text/html" language="java" import="java.sql.*"%>
 <!DOCTYPE html>
 <HTML><HEAD>
-
 
 <script src="js/bootstrap.js"></script>
 <link href="css/bootstrap.css" rel="stylesheet">
@@ -11,7 +10,7 @@
       background-color: #B0C4DE;
     }
     body {
-      padding-top: 40px; 
+      padding-top: 40px;
     }
     .container {
       width: 300px;
@@ -20,6 +19,7 @@
     .container > .content {
       background-color: #fff;
       padding: 20px;
+      padding-bottom: 5px;
       margin: 0 -20px; 
       -webkit-border-radius: 10px 10px 10px 10px;
          -moz-border-radius: 10px 10px 10px 10px;
@@ -28,16 +28,18 @@
          -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
               box-shadow: 0 1px 2px rgba(0,0,0,.15);
     }
-    
-    .login-form {
-		margin-left: 65px;
-	}
 	
 	legend {
 		margin-right: -50px;
 		font-weight: bold;
 	 	color: #404040;
 	}
+	
+	table {
+		max-width : 100%;
+		background-color: #B0C4DE;
+	}
+
 </style>
 
 </HEAD>
@@ -49,7 +51,7 @@
 		</form>
 	</div>
 
-
+	
 <%
 	String userName = null;
 	Cookie[] cookies = request.getCookies();
@@ -62,8 +64,7 @@
 	}
 	if (userName == null)
 		response.sendRedirect("index.jsp");
-
-	response.setContentType("text/html");
+	
 	response.getWriter().print(
 			"<TITLE>" + userName + "'s To-Do List</TITLE>");
 
@@ -85,7 +86,6 @@
 		ResultSet tables = connection.getMetaData().getTables(null, null, "ToDoObject", null);
 
 		if(tables.next()){
-
 			resultset = statement.executeQuery("SELECT DATE_FORMAT(timestamp, '%d/%m/%Y %k:%i') AS Timestamp, "
 													   + "task AS Task, ID FROM ToDoObject WHERE userName='" + userName + "'");
 			
@@ -99,8 +99,8 @@
 				ResultSetMetaData metaData = resultset.getMetaData();
 				int columnCount = metaData.getColumnCount();
 				
-				response.getWriter().print("<CENTER><p><B><FONT face=\"verdana\" color=\"red\" size=\"5\">"
-						+ "</FONT></B></p>"
+				response.getWriter().print("<div class=\"container\" style=\"width: 800px;\">"
+						+ "<div class=\"content\" style=\"max-height:535px; overflow:auto;\">"
 						+ "<TABLE class=\"table table-striped table-condensed table-bordered\" cellpadding=\"5\" border=\"1\"" + "<TR>");
 	
 				for (int i = 1; i <= columnCount; i++)
@@ -129,7 +129,7 @@
 					}
 					response.getWriter().print("</TR>");
 				}
-				response.getWriter().print("</TR></TABLE></CENTER>");
+				response.getWriter().print("</TR></TABLE></div></div><br /></CENTER>");
 			}
 			resultset.close();
 		}
@@ -140,11 +140,10 @@
 		System.out.println(e.getMessage());
 	}
 %>
-
-<div style="position: relative; text-align: center">
-	<a href="addItem.jsp">
-		<button style="position: relative; text-align:center" class="btn btn-success" type="button">Add Item</button>
-	</a>
-</div>
-
+	
+	<div style="position: relative; text-align: center">
+		<a href="addItem.jsp">
+			<button style="position: relative; text-align:center" class="btn btn-success" type="button">Add Item</button>
+		</a>
+	</div>
 </BODY></HTML>
