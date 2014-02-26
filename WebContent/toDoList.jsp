@@ -36,8 +36,8 @@
 		
 		if(!toDoObjects.isEmpty()){
 			response.getWriter().print("<div class=\"container\" style=\"width: 800px;\">"
-					+ "<div class=\"content\" style=\"max-height:535px; overflow:auto;\">"
-					+ "<TABLE class=\"table table-striped table-condensed table-bordered\" cellpadding=\"5\" border=\"1\">");
+					+ "<div class=\"content\"><div style=\"max-height:535px; overflow:auto;\">"
+					+ "<TABLE class=\"table table-striped table-condensed table-bordered\" cellpadding=\"5\" border=\"1\" >");
 			
 			
 			response.getWriter().print("<TR>"
@@ -59,7 +59,7 @@
 											+ "</TD>"
 										+ "</TR>");
 			}
-			response.getWriter().print("</TABLE></div></div><br /></CENTER>");
+			response.getWriter().print("</TABLE></div></div></div><br /></CENTER>");
 		}
 	}
 %>
