@@ -4,16 +4,22 @@ function validatePasswordsMatch(){
 	document["register"]["username"].value = document["register"]["username"].value.replace(/<\S[^><]*>/g, "");
 	
 	if(y != z || z == null || z == ""){
-		alert("Passwords must match");
+		alert("Passwords must match!");
 		document.forms["register"]["password"].focus;
 		return false;
 	}
+	else if(y.length < 5){
+		alert("Password must have at least 5 characters!");
+		document.forms["register"]["password"].focus;
+		return false;
+	} 
+	
 	return true;
 }
 
 function validateTask(task){
 	if(document["addItem"]["task"].value.length > 255){
-		alert("Task too long! Please enter a maximum of 255 characters.");
+		alert("Task too long!");
 		document["addItem"]["task"].focus();
 		return false;
 	}

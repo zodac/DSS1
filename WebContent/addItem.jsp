@@ -17,12 +17,22 @@
 	}
 	response.getWriter().print("<TITLE>" + userName + "'s To-Do List</TITLE>");
 %>
-
-<script src="js/validation.js"></script>
-<script src="js/bootstrap.js"></script>
-<link href="css/bootstrap.css" rel="stylesheet">
-<link href="css/customBootstrap.css" rel="stylesheet">
-
+	<script src="js/validation.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/jquery.tools.min.js"></script>
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/customBootstrap.css" rel="stylesheet">
+	
+	<script>
+		$(function() {
+			$("#task").tooltip({
+		    	position: "center right",
+		    	offset: [-2, 10],
+		    	effect: "fade",
+		    	opacity: 0.7
+		    });
+		});
+	</script>
 </head>
 
 <body>
@@ -37,10 +47,10 @@
 			<div class="row">
 				<div class="login-form">
 					<h2>Add Task</h2>
-					<form name="addItem" action="AddItemServlet" method="GET" onsubmit="return validateTask(this.task)">
+					<form id="myform" name="addItem" action="AddItemServlet" method="GET" onsubmit="return validateTask(this.task)">
 						<fieldset>
 							<div class="control-group">
-								<input type="text" name="task" placeholder="Task Description" required />
+								<input id="task" type="text" name="task" placeholder="Task Description" title="Maximum of 255 characters" required />
 							</div>
 							<button class="btn btn-success" type="submit">Add to list</button>
 							<a href="toDoList.jsp">
