@@ -69,11 +69,12 @@ public class PersistenceUtil implements Serializable {
 		return users;
 	}
 	
-//	public static List<String[]> findToDoObjectsByUsername(String userName){
-//		EntityManager em = emf.createEntityManager();
-//		List<String[]> toDoObjects = (List<String[]>) em.createNamedQuery("ToDoObject.findToDoObjectsByUsername").setParameter("userName", userName).getResultList();
-//		em.close();
-//		
-//		return toDoObjects;
-//	}
+	public static List<Object[]> findToDoObjectsByUsername(String userName){
+		EntityManager em = emf.createEntityManager();
+		List<Object[]> toDoObjects = (List<Object[]>) em.createNamedQuery("ToDoObject.findToDoObjectsByUsername")
+														.setParameter("user",  em.find(User.class, userName)).getResultList();
+		em.close();
+		
+		return toDoObjects;
+	}
 }

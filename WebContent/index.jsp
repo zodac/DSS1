@@ -1,44 +1,10 @@
+<!DOCTYPE html>
 <html><head>
-<title>Login page</title>
-
-<script src="js/bootstrap.js"></script>
-<link href="css/bootstrap.css" rel="stylesheet">
-
-<style type="text/css">
-    html, body {
-      background-color: #B0C4DE;
-    }
-    body {
-      padding-top: 40px;
-    }
-    .container {
-      width: 300px;
-    }
-
-    .container > .content {
-      background-color: #fff;
-      padding: 20px;
-      margin: 0 -20px; 
-      -webkit-border-radius: 10px 10px 10px 10px;
-         -moz-border-radius: 10px 10px 10px 10px;
-              border-radius: 10px 10px 10px 10px;
-      -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-         -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-              box-shadow: 0 1px 2px rgba(0,0,0,.15);
-    }
-    
-    
-    .login-form {
-		margin-left: 65px;
-	}
+	<title>Login page</title>
 	
-	legend {
-		margin-right: -50px;
-		font-weight: bold;
-	 	color: #404040;
-	}
-</style>
-
+	<script src="js/bootstrap.js"></script>
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/customBootstrap.css" rel="stylesheet">
 </head>
 
 <body>

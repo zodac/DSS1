@@ -1,5 +1,6 @@
 <%@ page contentType="text/html" language="java" import="java.sql.*"%>
-<HTML><HEAD>
+<!DOCTYPE html>
+<html><head>
 <%
 	String userName = null;
 	Cookie[] cookies = request.getCookies();
@@ -19,44 +20,11 @@
 <script src="js/validation.js"></script>
 <script src="js/bootstrap.js"></script>
 <link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/customBootstrap.css" rel="stylesheet">
 
-<style type="text/css">
-    html, body {
-      background-color: #B0C4DE;
-    }
-    body {
-      padding-top: 40px; 
-    }
-    .container {
-      width: 300px;
-    }
+</head>
 
-    .container > .content {
-      background-color: #fff;
-      padding: 20px;
-      margin: 0 -20px; 
-      -webkit-border-radius: 10px 10px 10px 10px;
-         -moz-border-radius: 10px 10px 10px 10px;
-              border-radius: 10px 10px 10px 10px;
-      -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-         -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-              box-shadow: 0 1px 2px rgba(0,0,0,.15);
-    }
-    
-    .login-form {
-		margin-left: 65px;
-	}
-	
-	legend {
-		margin-right: -50px;
-		font-weight: bold;
-	 	color: #404040;
-	}
-</style>
-
-</HEAD>
-
-<BODY>
+<body>
 	<div style="position: absolute; top: 10; right: 0; margin-right: 10px;">
 		<form method="post" name="logout" action="LogoutServlet">
 				<button class="btn btn-danger" type="submit">Logout</button>
@@ -83,4 +51,4 @@
 			</div>
 		</div>
 	</div>
-</BODY></HTML>
+</body></html>

@@ -9,12 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
-//@NamedQueries({
-//	@NamedQuery(name="ToDoObject.findToDoObjectsByUsername",
-//				query="SELECT o.date, o.task, o.id FROM ToDoObject o WHERE o.UserName = :userName"),
-//				query="SELECT o FROM ToDoObject o WHERE o.UserName = :userName"),
-//})
+@NamedQueries({
+	@NamedQuery(name="ToDoObject.findToDoObjectsByUsername",
+				query="SELECT DATE_FORMAT(o.date, '%d/%m/%Y %k:%i'), o.task, o.id FROM ToDoObject o WHERE o.user = :user"),
+})
 
 @Entity
 public class ToDoObject {

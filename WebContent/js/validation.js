@@ -1,12 +1,14 @@
 function validatePasswordsMatch(){
 	var y = document.forms["register"]["password"].value;
 	var z = document.forms["register"]["confirm"].value;
+	document["register"]["username"].value = document["register"]["username"].value.replace(/<\S[^><]*>/g, "");
 	
 	if(y != z || z == null || z == ""){
 		alert("Passwords must match");
 		document.forms["register"]["password"].focus;
 		return false;
 	}
+	return true;
 }
 
 function validateTask(task){
