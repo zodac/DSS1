@@ -1,6 +1,13 @@
 <%@ page contentType="text/html" language="java" import="java.sql.*"%>
 <!DOCTYPE html>
 <html><head>
+	<title>Add Task</title>
+	
+	<script src="js/validation.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/jquery.tools.min.js"></script>
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/customBootstrap.css" rel="stylesheet">
 <%
 	String userName = null;
 	Cookie[] cookies = request.getCookies();
@@ -15,14 +22,7 @@
 		response.getWriter().print("<script>alert(\"Must be logged in to view that page!\");"
 								 + "window.location.replace(\"index.jsp\");</script>");
 	}
-	response.getWriter().print("<TITLE>" + userName + "'s To-Do List</TITLE>");
-%>
-	<script src="js/validation.js"></script>
-	<script src="js/bootstrap.js"></script>
-	<script src="js/jquery.tools.min.js"></script>
-	<link href="css/bootstrap.css" rel="stylesheet">
-	<link href="css/customBootstrap.css" rel="stylesheet">
-	
+%>	
 	<script>
 		$(function() {
 			$("#task").tooltip({

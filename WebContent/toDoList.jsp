@@ -42,10 +42,9 @@
 			
 			response.getWriter().print("<TR>"
 									 + "<TD style=\"width: 150px;\"><B>Timestamp</B></TD>"
-									 + "<TD style=\"word-wrap: break-word\"><B>Task</B></TD>"
+									 + "<TD><B>Task</B></TD>"
 									 + "<TD style=\"width: 120px;\"><B>Remove Task</B></TD>"
 									 + "</TR>");
-			
 			
 			for(Object[] obj : toDoObjects){
 				response.getWriter().print("<TR>"
