@@ -20,6 +20,7 @@ public class RemoveItemServlet extends HttpServlet {
 			PersistenceUtil.removeToDoObject(itemID);
 		}
 		response.sendRedirect("toDoList.jsp");
+//		response.setHeader("Refresh", "5"); //URL becomes "http://localhost:8080/DSS1/RemoveItemServlet?removeID=xx"
 //		response.getWriter().print("<script>location.reload();</script>"); //Reloads servlet too - endless loop.
 	}
 }

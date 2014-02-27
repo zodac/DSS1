@@ -14,7 +14,7 @@ import javax.persistence.NamedQuery;
 
 @NamedQueries({
 	@NamedQuery(name="ToDoObject.findToDoObjectsByUsername",
-				query="SELECT DATE_FORMAT(o.date, '%d/%m/%Y %k:%i'), o.task, o.id FROM ToDoObject o WHERE o.user = :user"),
+				query="SELECT DATE_FORMAT(o.date, '%d/%b/%y, %k:%i'), o.task, o.id FROM ToDoObject o WHERE o.user = :user"),
 })
 
 @Entity
