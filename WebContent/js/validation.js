@@ -1,16 +1,23 @@
 function validatePasswordsMatch(){
+	var a = document["register"]["username"].value;
+	var b = document["register"]["username"].value.replace(/<\S[^><]*>/g, "");
+	
 	var y = document.forms["register"]["password"].value;
 	var z = document.forms["register"]["confirm"].value;
-	document["register"]["username"].value = document["register"]["username"].value.replace(/<\S[^><]*>/g, "");
 	
-	if(y != z || z == null || z == ""){
-		alert("Passwords must match!");
-		document.forms["register"]["password"].focus;
+	if(a != b){
+		alert("Invalid username!");
+		document.forms["register"]["username"].focus();
 		return false;
 	}
-	else if(y.length < 5){
-		alert("Password must have at least 5 characters!");
-		document.forms["register"]["password"].focus;
+	if(y != z || z == null || z == ""){
+		alert("Passwords must match!");
+		document.forms["register"]["password"].focus();
+		return false;
+	}
+	if(y.length < 6){
+		alert("Password must have at least 6 characters!");
+		document.forms["register"]["password"].focus();
 		return false;
 	} 
 	

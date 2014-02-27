@@ -20,5 +20,6 @@ public class RemoveItemServlet extends HttpServlet {
 			PersistenceUtil.removeToDoObject(itemID);
 		}
 		response.sendRedirect("toDoList.jsp");
+//		response.getWriter().print("<script>location.reload();</script>"); //Reloads servlet too - endless loop.
 	}
 }

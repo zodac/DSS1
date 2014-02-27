@@ -35,14 +35,14 @@
 		List<Object[]> toDoObjects = PersistenceUtil.findToDoObjectsByUsername(userName);
 		
 		if(!toDoObjects.isEmpty()){
-			response.getWriter().print("<div class=\"container\" style=\"width: 800px;\">"
+			response.getWriter().print("<div class=\"container\" style=\"width: 900px;\">"
 					+ "<div class=\"content\"><div style=\"max-height:535px; overflow:auto;\">"
-					+ "<TABLE class=\"table table-striped table-condensed table-bordered\" cellpadding=\"5\" border=\"1\" >");
+					+ "<TABLE class=\"table table-striped table-condensed table-bordered\" cellpadding=\"5\" border=\"1\" style=\"table-layout: fixed;\">");
 			
 			
 			response.getWriter().print("<TR>"
 									 + "<TD style=\"width: 150px;\"><B>Timestamp</B></TD>"
-									 + "<TD><B>Task</B></TD>"
+									 + "<TD style=\"word-wrap: break-word\"><B>Task</B></TD>"
 									 + "<TD style=\"width: 120px;\"><B>Remove Task</B></TD>"
 									 + "</TR>");
 			
@@ -50,7 +50,7 @@
 			for(Object[] obj : toDoObjects){
 				response.getWriter().print("<TR>"
 										 + "<TD style=\"width: 150px;\"><CENTER>" + String.valueOf(obj[0]) + "</CENTER></TD>"
-										 + "<TD>" + String.valueOf(obj[1]) + "</TD>"
+										 + "<TD style=\"max-width: 200px; word-wrap: break-word\">" + String.valueOf(obj[1]) + "</TD>"
 									 	 + "<TD style=\"width: 120px;\"><CENTER>"
 									 	 	+ "<form method=\"GET\" action=\"RemoveItemServlet\">"
 										 	+ "<input type=\"text\" value=\"" + String.valueOf(obj[2]) + "\" style=\"display:none;\" name=\"removeID\" />"

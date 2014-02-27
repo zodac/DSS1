@@ -32,7 +32,7 @@
 								<input id="username" type="text" name="username" placeholder="Username" title="Must be a unique username" required />
 							</div>
 							<div class="control-group">
-								<input id="password" type="password" name="password" placeholder="Password" title="Must have at least 5 characters" required />
+								<input id="password" type="password" name="password" placeholder="Password" title="Must have at least 6 characters" required />
 							</div>
 							<div class="control-group">
 								<input id="confirm" type="password" name="confirm" placeholder="Confirm password" title="Must match above password" required />
