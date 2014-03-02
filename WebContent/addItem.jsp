@@ -2,12 +2,12 @@
 <!DOCTYPE html>
 <html><head>
 	<title>Add Task</title>
-	
+
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/customBootstrap.css" rel="stylesheet">
 	<script src="js/validation.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script src="js/jquery.tools.min.js"></script>
-	<link href="css/bootstrap.css" rel="stylesheet">
-	<link href="css/customBootstrap.css" rel="stylesheet">
 <%
 	String userName = null;
 	Cookie[] cookies = request.getCookies();

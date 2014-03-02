@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
 			
 			if(passWordFromDB.equals(DigestUtils.sha1Hex(userPassword))){
 				Cookie loginCookie = new Cookie("user", userNameFromDB);
-				loginCookie.setMaxAge(30 * 60);
+				loginCookie.setMaxAge(15*60);
 
 				response.addCookie(loginCookie);
 				response.sendRedirect("toDoList.jsp");

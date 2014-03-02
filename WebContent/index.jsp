@@ -2,10 +2,10 @@
 <html><head>
 	<title>Login page</title>
 	
-	<script src="js/bootstrap.js"></script>
-	<script src="js/jquery.tools.min.js"></script>
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link href="css/customBootstrap.css" rel="stylesheet">
+	<script src="js/bootstrap.js"></script>
+	<script src="js/jquery.tools.min.js"></script>
 	
 	<script>
 		$(function() {

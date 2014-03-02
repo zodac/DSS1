@@ -3,9 +3,9 @@
 <%@ page contentType="text/html" language="java" import="java.util.List"%>
 <!DOCTYPE html>
 <html><head>
-	<script src="js/bootstrap.js"></script>
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link href="css/customBootstrap.css" rel="stylesheet">
+	<script src="js/bootstrap.js"></script>
 </head>
 
 <body>
